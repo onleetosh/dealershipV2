@@ -17,6 +17,73 @@ public class SalesContract extends Contract {
     private boolean isFinance; // do they want to finance (yes/no)
 
 
+
+    /**
+     *  Using Customer Class
+     */
+
+    public SalesContract(String date,
+                         Customer customerDetails,
+                         Vehicle vehicleSold,
+                         double salesTaxes,
+                         double recordingFee,
+                         double processingFee,
+                         double totalPrice,
+                         double monthlyPayment,
+                         boolean isFinance)
+    {
+        super(date, customerDetails, vehicleSold);
+        this.salesTax = vehicleSold.getPrice() * salesTaxPercentage;
+        this.recordingFee = 100;
+        this.processingFee = (vehicleSold.getPrice() < 10000) ? 295 : 495;
+        this.isFinance = isFinance;
+    }
+
+    public SalesContract(String date,
+                         Customer customerDetails,
+                         Vehicle vehicleSold,
+                         boolean isFinance)
+    {
+        super(date, customerDetails, vehicleSold);
+        this.salesTax = vehicleSold.getPrice() * salesTaxPercentage;
+        this.recordingFee = 100;
+        this.processingFee = (vehicleSold.getPrice() < 10000) ? 295 : 495;
+        this.isFinance = isFinance;
+    }
+
+    /**
+     *  Constructor Using Customer Class
+     */
+
+    public SalesContract(String date,
+                         Customer customerDetail,
+                         Vehicle vehicleSold,
+                         double salesTax,
+                         double recordingFee,
+                         double processingFee,
+                         boolean isFinance) {
+        super( date, customerDetail, vehicleSold);
+        this.salesTax = salesTax;
+        this.isFinance = isFinance;
+        this.processingFee = processingFee;
+        this.recordingFee = recordingFee;
+    }
+
+
+    public SalesContract(String date,
+                         String customerName,
+                         String customerEmail,
+                         Vehicle vehicleSold,
+                         boolean isFinance)
+    {
+        super(date, customerName, customerEmail, vehicleSold);
+        this.salesTax = vehicleSold.getPrice() * salesTaxPercentage;
+        this.recordingFee = 100;
+        this.processingFee = (vehicleSold.getPrice() < 10000) ? 295 : 495;
+        this.isFinance = isFinance;
+    }
+
+
     /**
      * Constructor One: used to initialize a Sales contract; requires minimal information and the missing
      * values are computed based on the vehicle's price.
@@ -127,14 +194,16 @@ public class SalesContract extends Contract {
      * Override to convert and return Sales contract as a custom string
      */
 
+
+
     @Override
     public String toString() {
         String financeDecision = isFinance ? "YES" : "NO";
         // 0  1  2  3  4  5  6  7  8  9  10  11   12   13   14  15   16  17
         return String.format("SALES|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f|%s|%.2f",
                 this.date, //1
-                this.customerName,//2
-                this.customerEmail, //3
+                this.customerInformation.getName(),//2
+                this.customerInformation.getEmail(),
                 this.vehicleSold.getVin(),//4
                 this.vehicleSold.getYear(),//5
                 this.vehicleSold.getMake(),//6
@@ -150,5 +219,29 @@ public class SalesContract extends Contract {
                 financeDecision, //16
                 getMonthlyPayment()); //17
     }
+
+
+//    public String toString() {
+//        String financeDecision = isFinance ? "YES" : "NO";
+//        // 0  1  2  3  4  5  6  7  8  9  10  11   12   13   14  15   16  17
+//        return String.format("SALES|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f|%s|%.2f",
+//                this.date, //1
+//                this.customerName,//2
+//                this.customerEmail, //3
+//                this.vehicleSold.getVin(),//4
+//                this.vehicleSold.getYear(),//5
+//                this.vehicleSold.getMake(),//6
+//                this.vehicleSold.getModel(),//7
+//                this.vehicleSold.getVehicleType(),//8
+//                this.vehicleSold.getColor(),//9
+//                this.vehicleSold.getOdometer(),//10
+//                this.vehicleSold.getPrice(), //11
+//                this.salesTax, //12
+//                this.recordingFee, //13
+//                this.processingFee, //14
+//                getTotalPrice(), //15
+//                financeDecision, //16
+//                getMonthlyPayment()); //17
+//    }
 
 }

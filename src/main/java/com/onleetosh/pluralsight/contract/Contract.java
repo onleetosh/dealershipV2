@@ -1,6 +1,11 @@
 package com.onleetosh.pluralsight.contract;
 
+import com.onleetosh.pluralsight.datamanager.ContractManager;
+import com.onleetosh.pluralsight.datamanager.DataManager;
 import com.onleetosh.pluralsight.dealership.Vehicle;
+
+import java.awt.*;
+import java.util.List;
 
 public abstract class Contract {
 
@@ -10,8 +15,39 @@ public abstract class Contract {
     protected String customerEmail;
     protected Vehicle vehicleSold;
 
+
+    private int customerId;
+
+    static List<Contract> contractList;
+
     protected double totalPrice;
     protected double monthlyPayment;
+
+    private ContractManager contractManager;
+
+
+    // with Customer class
+
+    protected Customer customerInformation;
+    public Contract(String date,
+                       Customer customerInformation,
+                       Vehicle vehicleSold) {
+        this.date = date;
+        this.customerInformation = customerInformation;
+        this.vehicleSold = vehicleSold;
+    }
+
+    public Contract(ContractManager contractManager,
+                    String date,
+                    Customer customerInformation,
+                    Vehicle vehicleSold) {
+        this.contractManager = contractManager;
+        this.date = date;
+        this.customerInformation = customerInformation;
+        this.vehicleSold = vehicleSold;
+    }
+
+
 
     public Contract(String date,
                     String customerName,
@@ -44,6 +80,10 @@ public abstract class Contract {
         return vehicleSold;
     }
 
+    public List<Contract> getContractList(){
+        return contractManager.getContractsFromDatabase();
+
+    }
 
 
     /**
@@ -76,6 +116,12 @@ public abstract class Contract {
     }
 
 
+    public int getCustomerId(){
+        return customerId;
+    }
+    public void addLeaseContract(LeaseContract contract, Customer customer, Vehicle vehicle){
+        contractManager.processInsertLeaseContract(contract, customer, vehicle);
+    }
     public abstract double getTotalPrice();
     public abstract double getMonthlyPayment();
 }

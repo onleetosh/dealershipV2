@@ -3,7 +3,7 @@ package com.onleetosh.pluralsight.datamanager;
 import com.onleetosh.pluralsight.dealership.Vehicle;
 import com.onleetosh.pluralsight.util.Console;
 
-import static com.onleetosh.pluralsight.util.UI.*;
+import static com.onleetosh.pluralsight.dealership.Dealership.*;
 
 public class VehicleRequest {
     /**
@@ -15,17 +15,7 @@ public class VehicleRequest {
         currentDealership.removeVehicleFromInventory(getVehicleByVin(vin));
     }
 
-    /**
-     * get a vehicle by vin number
-     */
-    private static Vehicle getVehicleByVin(int vin) {
-        for(Vehicle v : currentDealership.getInventory()){
-            if(v.getVin() == vin){
-                return v;
-            }
-        }
-        return null;
-    }
+
 
     /**
      * Helper method designed to process adding a vehicle to the inventory and save changes to inventory.csv
@@ -34,6 +24,7 @@ public class VehicleRequest {
         Vehicle newVehicle = promptForVehicleDetails();
         currentDealership.addVehicleToInventory(newVehicle);
     }
+
 
     /**
      * prompt user for  details when adding a vehicle

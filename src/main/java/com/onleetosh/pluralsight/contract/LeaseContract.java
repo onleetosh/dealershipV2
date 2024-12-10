@@ -14,6 +14,50 @@ public class LeaseContract extends Contract {
     private double expectEndingValuePercentage = 0.5;
     private double leaseFeePercentage = 0.07;
 
+
+    public LeaseContract(String date,
+                         Customer customerInformation,
+                         Vehicle vehicleSold) {
+        super(date, customerInformation, vehicleSold);
+        this.expectEndingValue = vehicleSold.getPrice() * expectEndingValuePercentage;
+        this.leaseFee = vehicleSold.getPrice() * leaseFeePercentage;
+    }
+
+
+    /**
+     * Constructor with Customer Class
+     */
+    public LeaseContract(String date,
+                         Customer customerInformation,
+                         Vehicle vehicleSold,
+                         double expectEndingValue,
+                         double leaseFee,
+                         double totalPrice,
+                         double monthlyPayment) {
+        super(date, customerInformation, vehicleSold);
+        this.expectEndingValue = vehicleSold.getPrice() * expectEndingValuePercentage;
+        this.leaseFee = vehicleSold.getPrice() * leaseFeePercentage;
+    }
+
+    /**
+     * Constructor with Customer Class
+     */
+
+    public LeaseContract(String date,
+                         Customer customerInformation,
+                         Vehicle vehicleSold,
+                         double expectEndingValue,
+                         double leaseFee) {
+        super(date, customerInformation, vehicleSold);
+        this.leaseFee = leaseFee;
+        this.expectEndingValue = expectEndingValue;
+    }
+
+
+    /**
+     * Constructor without Customer Class (Previous used)
+     */
+
     public LeaseContract(String date,
                          String customerName,
                          String customerEmail,
@@ -23,6 +67,10 @@ public class LeaseContract extends Contract {
         this.leaseFee = vehicleSold.getPrice() * leaseFeePercentage;
     }
 
+
+    /**
+     * Constructor without Customer Class (Previous used)
+     */
     public LeaseContract(String date,
                          String customerName,
                          String customerEmail,
@@ -81,13 +129,14 @@ public class LeaseContract extends Contract {
     /**
      * Override to convert and return Sales contract as a custom string
      */
+
     @Override
     public String toString() {
         // 0  1  2  3  4  5  6  7  8  9  10  11   12   13   14  15
         return String.format("LEASE|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f",
                 this.date,
-                this.customerName,
-                this.customerEmail,
+                this.customerInformation.getName(),
+                this.customerInformation.getEmail(),
                 this.vehicleSold.getVin(),
                 this.vehicleSold.getYear(),
                 this.vehicleSold.getMake(),
@@ -101,4 +150,26 @@ public class LeaseContract extends Contract {
                 getTotalPrice(),
                 getMonthlyPayment());
     }
+
+
+//    @Override
+//    public String toString() {
+//        // 0  1  2  3  4  5  6  7  8  9  10  11   12   13   14  15
+//        return String.format("LEASE|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f",
+//                this.date,
+//                this.customerName,
+//                this.customerEmail,
+//                this.vehicleSold.getVin(),
+//                this.vehicleSold.getYear(),
+//                this.vehicleSold.getMake(),
+//                this.vehicleSold.getModel(),
+//                this.vehicleSold.getVehicleType(),
+//                this.vehicleSold.getColor(),
+//                this.vehicleSold.getOdometer(),
+//                this.vehicleSold.getPrice(),
+//                this.expectEndingValue,
+//                this.leaseFee,
+//                getTotalPrice(),
+//                getMonthlyPayment());
+//    }
 }

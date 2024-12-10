@@ -15,6 +15,9 @@ public class Dealership {
 
     private DataManager dataManager;
 
+    public static Dealership currentDealership;
+
+
     public Dealership(DataManager dataManager, int dealershipID, String name, String address, String phone) {
         this.dealershipID = dealershipID;
         this.name = name;
@@ -113,6 +116,17 @@ public class Dealership {
 
     }
 
+    /**
+     * get a vehicle by vin number
+     */
+    public static Vehicle getVehicleByVin(int vin) {
+        for(Vehicle v : currentDealership.getInventory()){
+            if(v.getVin() == vin){
+                return v;
+            }
+        }
+        return null;
+    }
 
 
 

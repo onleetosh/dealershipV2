@@ -1,4 +1,4 @@
-package com.onleetosh.pluralsight;
+package com.onleetosh.pluralsight.dealership;
 
 import com.onleetosh.pluralsight.datamanager.*;
 import com.onleetosh.pluralsight.util.UI;
@@ -19,7 +19,6 @@ public class Main {
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
 
     }
 }

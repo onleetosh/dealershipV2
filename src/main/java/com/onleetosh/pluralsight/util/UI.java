@@ -1,17 +1,17 @@
 package com.onleetosh.pluralsight.util;
 
-import com.onleetosh.pluralsight.contract.SalesContract;
 import com.onleetosh.pluralsight.datamanager.*;
 import com.onleetosh.pluralsight.dealership.*;
 import org.apache.commons.dbcp2.BasicDataSource;
+
+import static com.onleetosh.pluralsight.dealership.Dealership.*;
+
 
 public class UI {
 
 
 
     private int currentDealershipId = 2;
-    public static Dealership currentDealership;
-    // public static ArrayList<Contract> contracts;
 
     private DataManager dataManager;
     /**
@@ -19,16 +19,9 @@ public class UI {
      * a dealership with inventory and a list of contract (objects)
      */
     public UI(DataManager dataManager){
-        // currentDealership = RequestData.getDealershipFromDatabase();
-        // contracts = ContractFileManager.getContractsFromCSV(contractFileName);
         this.dataManager = dataManager;
         currentDealership= dataManager.getDealershipFromDatabase(currentDealershipId);
     }
-
-    /**
-     * UI Constructor initializes and loads the file content to ensure the program starts with
-     * a dealership with inventory and a list of contract (objects)
-     */
 
 
     /**
@@ -73,8 +66,7 @@ public class UI {
                 case 7 -> VehicleRequest.processGetAllVehiclesRequest();
                 case 8 -> VehicleRequest.processAddVehicleRequest();
                 case 9 -> VehicleRequest.processRemoveVehicleRequest();
-                //case 10 -> Request.processSellOrLeaseRequest();
-
+                case 10 -> ContractRequest.processSellOrLeaseRequest();
                 case 11 -> ContractRequest.getLeaseContract(args);
                 case 12 -> ContractRequest.getSalesContract(args);
                 case 13 -> ContractRequest.getContracts(args);
